@@ -9,56 +9,56 @@ namespace Web.Controllers;
 //[Authorize]
 public class HomeController : Controller
 {
-    //private readonly IWorkspaceRepository _workspaceRepository;
-    //private readonly INoteRepository _noteRepository;
+    private readonly IWorkspaceRepository _workspaceRepository;
+    private readonly INoteRepository _noteRepository;
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
-    {
-        _logger = logger;
-    }
-    
-    // public HomeController(IWorkspaceRepository workspaceRepository, INoteRepository noteRepository,
-    //     ILogger<HomeController> logger)
+    // public HomeController(ILogger<HomeController> logger)
     // {
-    //     _workspaceRepository = workspaceRepository;
-    //     _noteRepository = noteRepository;
     //     _logger = logger;
     // }
-
-    public IActionResult Index()
+    
+    public HomeController(IWorkspaceRepository workspaceRepository, INoteRepository noteRepository,
+        ILogger<HomeController> logger)
     {
-        return View();
+        _workspaceRepository = workspaceRepository;
+        _noteRepository = noteRepository;
+        _logger = logger;
     }
 
-    // public async Task<IActionResult> Index()
+    // public IActionResult Index()
     // {
-    //     var workspaces = await _workspaceRepository.GetAllAsync();
-    //     var viewModel = new WorkspaceListViewModel
-    //     {
-    //         Workspaces = workspaces.Select(w => new WorkspaceViewModel
-    //         {
-    //             Id = w.Id,
-    //             Name = w.Name,
-    //             Description = w.Description,
-    //             UserId = w.UserId,
-    //             CreatedAt = w.CreatedAt,
-    //             ModifiedAt = w.ModifiedAt,
-    //             Notes = w.Notes.Select(n => new NoteViewModel
-    //             {
-    //                 Id = n.Id,
-    //                 Title = n.Title,
-    //                 Content = n.Content,
-    //                 WorkspaceId = n.WorkspaceId,
-    //                 WorkspaceName = w.Name,
-    //                 CreatedAt = n.CreatedAt,
-    //                 ModifiedAt = n.ModifiedAt
-    //             }).ToList()
-    //         }).ToList()
-    //     };
-    //
-    //     return View(viewModel);
+    //     return View();
     // }
+
+    public async Task<IActionResult> Index()
+    {
+        var workspaces = await _workspaceRepository.GetAllAsync();
+        var viewModel = new WorkspaceListViewModel
+        {
+            Workspaces = workspaces.Select(w => new WorkspaceViewModel
+            {
+                Id = w.Id,
+                Name = w.Name,
+                Description = w.Description,
+                UserId = w.UserId,
+                CreatedAt = w.CreatedAt,
+                ModifiedAt = w.ModifiedAt,
+                Notes = w.Notes.Select(n => new NoteViewModel
+                {
+                    Id = n.Id,
+                    Title = n.Title,
+                    Content = n.Content,
+                    WorkspaceId = n.WorkspaceId,
+                    WorkspaceName = w.Name,
+                    CreatedAt = n.CreatedAt,
+                    ModifiedAt = n.ModifiedAt
+                }).ToList()
+            }).ToList()
+        };
+    
+        return View(viewModel);
+    }
 
     public IActionResult Privacy()
     {

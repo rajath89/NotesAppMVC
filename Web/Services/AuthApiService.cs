@@ -23,7 +23,7 @@ public class AuthApiService : IAuthApiService
                 var json = JsonSerializer.Serialize(request);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 
-                var response = await _httpClient.PostAsync("/NotesApp/public/api/v1/Auth/login", content);
+                var response = await _httpClient.PostAsync("http://localhost:5011/NotesApp/public/api/v1/Auth/login", content);
                 response.EnsureSuccessStatusCode();
                 
                 var jsonString = await response.Content.ReadAsStringAsync();
@@ -48,7 +48,7 @@ public class AuthApiService : IAuthApiService
                 var json = JsonSerializer.Serialize(request);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 
-                var response = await _httpClient.PostAsync("/NotesApp/public/api/v1/Auth/register", content);
+                var response = await _httpClient.PostAsync("http://localhost:5011/NotesApp/public/api/v1/Auth/register", content);
                 response.EnsureSuccessStatusCode();
                 
                 var jsonString = await response.Content.ReadAsStringAsync();

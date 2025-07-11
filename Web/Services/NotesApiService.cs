@@ -20,7 +20,7 @@ public class NotesApiService : INotesApiService
         {
             try
             {
-                var response = await _httpClient.GetAsync("/NotesApp/api/v1/Workspaces/GetWorkspaces");
+                var response = await _httpClient.GetAsync("http://localhost:5011/NotesApp/api/v1/Workspaces/GetWorkspaces");
                 response.EnsureSuccessStatusCode();
                 
                 var jsonString = await response.Content.ReadAsStringAsync();
@@ -42,7 +42,7 @@ public class NotesApiService : INotesApiService
         {
             try
             {
-                var response = await _httpClient.GetAsync($"/NotesApp/api/v1/Workspaces/GetWorkspace?id={id}");
+                var response = await _httpClient.GetAsync($"http://localhost:5011/NotesApp/api/v1/Workspaces/GetWorkspace?id={id}");
                 response.EnsureSuccessStatusCode();
                 
                 var jsonString = await response.Content.ReadAsStringAsync();
@@ -158,7 +158,7 @@ public class NotesApiService : INotesApiService
         {
             try
             {
-                var response = await _httpClient.GetAsync($"/NotesApp/api/v1/Notes/GetNote?id={id}");
+                var response = await _httpClient.GetAsync($"http://localhost:5011/NotesApp/api/v1/Notes/GetNote?id={id}");
                 response.EnsureSuccessStatusCode();
                 
                 var jsonString = await response.Content.ReadAsStringAsync();

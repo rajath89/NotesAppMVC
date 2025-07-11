@@ -69,6 +69,7 @@ public class NotesController : Controller
         }
 
         var workspace = await _workspaceRepository.GetByIdAsync(note.WorkspaceId);
+        ViewBag.Workspaces = await _workspaceRepository.GetAllAsync();
         var viewModel = new NoteViewModel
         {
             Id = note.Id,

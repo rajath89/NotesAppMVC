@@ -12,7 +12,7 @@
                 @foreach (var workspace in ViewBag.Workspaces)
                 {
                     <li class="list-group-item workspace-item @((Model.WorkspaceId == workspace.Id) ? "active" : "")" data-workspace-id="@workspace.Id">
-                        <span class="toggle-icon">@(workspace.Notes.Any() ? "▶" : "")</span>
+                        @*<span class="toggle-icon">@(workspace.Notes.Any() ? "▶" : "")</span>*@
                         <span class="workspace-name">@workspace.Name</span>
                         <ul class="list-group note-list @(Model.WorkspaceId == workspace.Id ? "show" : "")">
                             @foreach (var note in workspace.Notes)

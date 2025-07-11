@@ -17,23 +17,26 @@
         <div class="col-12 col-md-3 p-3 bg-light border-end">
             <h4>Workspaces</h4>
             <ul class="list-group workspace-tree">
-                @foreach (var workspace in Model.Workspaces)
+                @if (Model.Workspaces != null && Model.Workspaces.Any())
                 {
-                    <li class="list-group-item workspace-item @((Model.SelectedWorkspaceId == workspace.Id) ? "active" : "")" data-workspace-id="@workspace.Id">
-                        <span class="toggle-icon">@(workspace.Notes.Any() ? "▶" : "")</span>
-                        <span class="workspace-name">@workspace.Name</span>
-                        <ul class="list-group note-list @(Model.SelectedWorkspaceId == workspace.Id ? "show" : "")">
-                            @foreach (var note in workspace.Notes)
-                            {
-                                <li class="list-group-item note-item">
-                                    <a class="note-link" href="@Url.Action("Details", "Notes", new { id = note.Id })">@note.Title</a>
+                    @foreach (var workspace in Model.Workspaces)
+                    {
+                        <li class="list-group-item workspace-item @((Model.SelectedWorkspaceId == workspace.Id) ? "active" : "")" data-workspace-id="@workspace.Id">
+                            <span class="toggle-icon">@(workspace.Notes.Any() ? "▶" : "")</span>
+                            <span class="workspace-name">@workspace.Name</span>
+                            <ul class="list-group note-list @(Model.SelectedWorkspaceId == workspace.Id ? "show" : "")">
+                                @foreach (var note in workspace.Notes)
+                                {
+                                    <li class="list-group-item note-item">
+                                        <a class="note-link" href="@Url.Action("Details", "Notes", new { id = note.Id })">@note.Title</a>
+                                    </li>
+                                }
+                                <li class="list-group-item">
+                                    <a class="create-note" href="@Url.Action("Create", "Notes", new { workspaceId = workspace.Id })">+ New Note</a>
                                 </li>
-                            }
-                            <li class="list-group-item">
-                                <a class="create-note" href="@Url.Action("Create", "Notes", new { workspaceId = workspace.Id })">+ New Note</a>
-                            </li>
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
+                    }
                 }
                 <li class="list-group-item">
                     <a class="create-note" href="@Url.Action("Create", "Workspaces")">+ New Workspace</a>
